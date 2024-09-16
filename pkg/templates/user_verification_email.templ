@@ -1,0 +1,12 @@
+package templates
+
+templ UserVerificationEmail(firstName, link string) {
+	<html>
+		<head></head>
+		<body>
+			<p>Hi { firstName },</p>
+			<p>Thank you for signing up with us. Please click the link below to verify your email address.</p>
+			<a href={ templ.URL(link) }>Verify Email</a>
+		</body>
+	</html>
+}
