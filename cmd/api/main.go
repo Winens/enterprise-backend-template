@@ -28,7 +28,7 @@ func main() {
 	fx.New(
 
 		fx.Provide(db.NewPostgres, db.NewOneTimeTokenStore, service.NewTokenService,
-			service.NewSMTPService),
+			service.NewSMTPService, service.NewS3Storage),
 
 		// Repositories
 		fx.Provide(
@@ -48,7 +48,7 @@ func main() {
 
 		fx.Provide(restapi.NewMiddlewares, restapi.NewHTTPServer),
 
-		fx.Invoke(restapi.SetupRoutes),
+		fx.Invoke(restapi.SetupRoutes, service.MigrateS3Buckets),
 		fx.Invoke(restapi.RunHTTPServer),
 	).Run()
 }
