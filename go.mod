@@ -19,7 +19,6 @@ require (
 	github.com/vgarvardt/pgx-google-uuid/v5 v5.6.0
 	go.uber.org/fx v1.22.2
 	golang.org/x/crypto v0.27.0
-	golang.org/x/net v0.28.0
 	google.golang.org/grpc v1.65.0
 )
 
@@ -58,6 +57,7 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.27.0 // indirect
 	golang.org/x/exp v0.0.0-20240719175910-8a7402abbf56 // indirect
+	golang.org/x/net v0.28.0 // indirect
 	golang.org/x/sync v0.8.0 // indirect
 	golang.org/x/sys v0.25.0 // indirect
 	golang.org/x/text v0.18.0 // indirect

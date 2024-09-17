@@ -79,7 +79,7 @@ func (h *authHandler) Logout(c *fiber.Ctx) error {
 	}
 
 	if err := h.authUseCase.Logout(context.Background(), sess); err != nil {
-		return fmt.Errorf("failed to logout", err)
+		return fmt.Errorf("failed to logout: %w", err)
 	}
 
 	c.ClearCookie("session_token")

@@ -57,7 +57,7 @@ func (u *authUseCase) SignUp(ctx context.Context, details request.SignUp) error 
 	// hash password
 	passwordHash, err := bcrypt.GenerateFromPassword([]byte(details.Password), passwordHashCost)
 	if err != nil {
-		return fmt.Errorf("failed to generate bcrypt hash", err)
+		return fmt.Errorf("failed to generate bcrypt hash: %w", err)
 	}
 
 	// pass the hash into object
@@ -79,7 +79,7 @@ func (u *authUseCase) SignUp(ctx context.Context, details request.SignUp) error 
 
 		verificationToken, err := u.tokenService.Sign(claims)
 		if err != nil {
-			return fmt.Errorf("failed to generate verification token", err)
+			return fmt.Errorf("failed to generate verification token: %w", err)
 		}
 
 		// send verification email
@@ -140,7 +140,7 @@ func (u *authUseCase) ConfirmEmail(ctx context.Context, token string) error {
 		jwt.WithIssuer("enterprise-backend-template"))
 
 	if err != nil {
-		return fmt.Errorf("failed to verify email verification token: %w", errdefs.InvalidToken, err)
+		return fmt.Errorf("failed to verify email verification token: %w (%w)", errdefs.InvalidToken, err)
 	}
 
 	userId, err := strconv.ParseInt(claims.Subject, 10, 64)
@@ -156,7 +156,7 @@ func (u *authUseCase) FindSessionByToken(ctx context.Context, sessionToken strin
 
 	key, err := base64.StdEncoding.DecodeString(os.Getenv("SESSION_SECRET"))
 	if err != nil {
-		return nil, fmt.Errorf("failed key", err)
+		return nil, fmt.Errorf("failed key :%w", err)
 	}
 
 	aead, err := chacha20poly1305.NewX(key)

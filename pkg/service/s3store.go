@@ -20,8 +20,11 @@ func NewS3Storage() (*minio.Client, error) {
 
 func MigrateS3Buckets(s3 *minio.Client) error {
 	ctx := context.Background()
-	if err := s3.MakeBucket(ctx, "attachments", minio.MakeBucketOptions{}); err != nil {
-		return err
+
+	buckets := []string{"attachments"}
+
+	for _, bucketName := range buckets {
+		s3.MakeBucket(ctx, bucketName, minio.MakeBucketOptions{})
 	}
 
 	return nil

@@ -6,6 +6,7 @@ dev-tools:
 	@go install go.uber.org/mock/mockgen@latest
 	@go install github.com/air-verse/air@latest
 	@go install github.com/a-h/templ/cmd/templ@latest
+	@go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.61.0
 	@echo "Done."
 
 deps:
@@ -17,7 +18,7 @@ deps-cleancache:
 	@go clean -modcache
 
 check:
-	golangci-lint run
+	@golangci-lint run
 
 keys:
 	@echo "Generating secret keys..."
